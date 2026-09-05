@@ -1,0 +1,5 @@
+{
+  "name": "dnd-server",
+  "version": "0.1.0",
+  "dependencies": ["asio", "nlohmann-json", "sqlite3", "catch2"]
+}
