@@ -1,3 +1,18 @@
+# Build output
 build/
+build-release/
 vcpkg_installed/
-.cache/ 
+.cache/
+
+# Machine-local CMake preset overrides
+CMakeUserPresets.json
+
+# Editor / IDE
+.vs/
+
+# SQLite campaign databases and their write-ahead-log sidecars
+*.db
+*.sqlite
+*.sqlite3
+*-wal
+*-shm

@@ -70,7 +70,8 @@ Server → clients (broadcast):
 
 ```json
 {"type":"player_joined","name":"Somil"}
-{"type":"roll_result","player":"Somil","expr":"2d6+3","dice":[4,6],"total":13}
+{"type":"roll_result","player":"Somil","expr":"2d6+3","dice":[4,6],"total":13,"modifier":3}
+
 {"type":"chat","player":"Somil","text":"I check for traps"}
 ```
 
@@ -121,19 +122,36 @@ anything, a web client, character sheets, combat rules.
 
 ## Build commands
 
+Presets live in `CMakePresets.json`: `default` (Debug, `build/`) and `release`
+(Release, `build-release/`, used by CI).
+
 ```powershell
 # Configure (VS Code: CMake: Configure)
 cmake --preset default
 
 # Build
-cmake --build build
+cmake --build --preset default
 
 # Test
-ctest --test-dir build --output-on-failure
+ctest --preset default
 ```
 
 In VS Code, prefer the CMake Tools status bar and command palette
 (`CMake: Configure`, `CMake: Build`, `CMake: Run Without Debugging`).
+CMake Tools supplies the MSVC environment itself, so the presets just work there.
+
+**From a plain terminal**, the Ninja generator needs `cl.exe` on `PATH`, so run
+from a Developer PowerShell / Developer Command Prompt, or `call` this first:
+
+```
+C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\Auxiliary\Build\vcvars64.bat
+```
+
+**Gotcha:** `vcvars64.bat` overwrites `VCPKG_ROOT` with Visual Studio's own
+bundled vcpkg. That copy is not a git checkout, so it can only resolve the
+manifest because `vcpkg.json` pins `builtin-baseline` — but it rebuilds every
+port from source instead of hitting the binary cache. To use the fast path, set
+`VCPKG_ROOT=C:\vcpkg` _after_ sourcing vcvars.
 
 ## Conventions
 
@@ -157,3 +175,4 @@ project.
 
 When suggesting an approach, favor the simplest thing that works over the
 most impressive. A finished project beats an ambitious unfinished one.
+Always give hints or talk in plain english before giving code snippets, unless asked
