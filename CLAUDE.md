@@ -94,12 +94,11 @@ single handle with its own mutex or open one connection per thread.
 
 ## Current state
 
-Toolchain scaffold builds and runs. `common/dice.cpp` is a stub that always
-returns 1. One placeholder Catch2 test passes. No networking yet.
+Phase 1 complete. Dice parses, returning an optional rollresult
 
 ## Roadmap
 
-- [ ] **Phase 1 — Dice parser.** Pure logic in `common/`. Parse `2d6+3`, `d20`,
+- [x] **Phase 1 — Dice parser.** Pure logic in `common/`. Parse `2d6+3`, `d20`,
       `4d8-2`. Return individual dice plus total. Catch2 tests covering
       malformed input, zero dice, absurd counts (`999999d6` must be rejected,
       not hang), negative modifiers.
