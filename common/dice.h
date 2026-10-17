@@ -1,4 +1,5 @@
 #pragma once
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -8,4 +9,5 @@ struct RollResult {
     int total = 0;
 };
 
-RollResult roll(const std::string& expr);
+// Returns std::nullopt if expr is malformed or out of range.
+std::optional<RollResult> roll(const std::string& expr);
