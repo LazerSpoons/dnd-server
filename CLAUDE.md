@@ -75,6 +75,13 @@ Server → clients (broadcast):
 {"type":"chat","player":"Somil","text":"I check for traps"}
 ```
 
+Server → one client (in reply to a bad message — invalid JSON, unknown type,
+bad dice expression, rolling before joining):
+
+```json
+{"type":"error","message":"unknown dice expression"}
+```
+
 Roll results carry the individual dice, not just the total, so clients can
 display `[4, 6] + 3 = 13`.
 

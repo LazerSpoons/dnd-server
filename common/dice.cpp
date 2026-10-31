@@ -4,7 +4,7 @@
 #include <random>
 namespace {
     std::mt19937& rng() {
-        static std::mt19937 engine{std::random_device{}()};
+        thread_local std::mt19937 engine{std::random_device{}()};
         return engine;
     }
 }
