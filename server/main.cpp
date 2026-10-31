@@ -1,12 +1,14 @@
 #include <asio.hpp>
-#include <nlohmann/json.hpp>
-#include <sqlite3.h>
+
 #include <iostream>
+using asio::ip::tcp;
 
 int main() {
     asio::io_context io;
-    nlohmann::json j = {{"status", "ok"}};
-    std::cout << j.dump() << "\n";
-    std::cout << "sqlite " << sqlite3_libversion() << "\n";
+    tcp::acceptor acceptor(io, tcp::endpoint(asio::ip::make_address("127.0.0.1"), 5000));
+    tcp::socket socket(io);
+    std::cout << "Server is listening on 5000..." << std::endl;
+    acceptor.accept(socket);
+    std::cout << "Client connected: " << socket.remote_endpoint() << std::endl;
     return 0;
 }
