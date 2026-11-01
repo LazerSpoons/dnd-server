@@ -1,0 +1,17 @@
+# Used by VS Code's Format Document (C/C++ extension) and by clang-format directly.
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 120
+BreakBeforeBraces: Attach
+PointerAlignment: Left
+NamespaceIndentation: All
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortFunctionsOnASingleLine: Empty
+SortIncludes: Never
+SpacesBeforeTrailingComments: 2
+AlignTrailingComments:
+  Kind: Leave
+FixNamespaceComments: false
+BreakBeforeBinaryOperators: NonAssignment
+BinPackArguments: false
+ReflowComments: false

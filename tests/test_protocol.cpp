@@ -72,6 +72,13 @@ TEST_CASE("roll_result serializes with the documented field names") {
     REQUIRE(j["total"] == 13);
 }
 
+TEST_CASE("\"type\" is the first key on the wire") {
+    // Readability by eye in nc/Telnet: the message type should lead every line.
+    REQUIRE(to_line(RollResultMessage{"Somil", "d20", {7}, 0, 7}).starts_with(R"({"type":"roll_result",)"));
+    REQUIRE(to_line(ErrorMessage{"oops"}).starts_with(R"({"type":"error",)"));
+    REQUIRE(to_line(JoinRequest{"Somil"}).starts_with(R"({"type":"join",)"));
+}
+
 TEST_CASE("Every serialized message is exactly one line") {
     // A newline inside a string must be escaped, or it would split the message in two.
     auto line = to_line(ChatMessage{"Somil", "line one\nline two"});

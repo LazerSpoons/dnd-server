@@ -1,7 +1,9 @@
 #include "protocol.h"
 #include <nlohmann/json.hpp>
 
-using nlohmann::json;
+// ordered_json keeps keys in insertion order, so "type" is always first on the wire
+// and lines stay easy to read by eye. Plain nlohmann::json would sort keys alphabetically.
+using json = nlohmann::ordered_json;
 
 namespace {
     bool has_string(const json& j, const char* key) {
